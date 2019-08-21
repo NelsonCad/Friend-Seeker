@@ -12,9 +12,13 @@ var PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get("/survey", function (req, res) {
+    res.sendFile(path.join(__dirname, "questions"));
+});
 
-
-
+app.get("*", function (req,res) {
+    res.sendFile(path.join(__dirname, "index"))
+})
 
 app.listen(PORT, function () {
     // Log (server-side) when our server has started
