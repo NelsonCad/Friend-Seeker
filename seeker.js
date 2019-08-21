@@ -6,19 +6,14 @@ var path = require("path");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = 8080; // = process.env.PORT ||
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/survey", function (req, res) {
-    res.sendFile(path.join(__dirname, "questions"));
-});
-
-app.get("*", function (req,res) {
-    res.sendFile(path.join(__dirname, "index"))
-})
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
 app.listen(PORT, function () {
     // Log (server-side) when our server has started
