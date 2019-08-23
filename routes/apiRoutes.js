@@ -1,4 +1,5 @@
 let friendsData = require("./Data/friends");
+let comparison = { name: "nobody", similarity: 40 };
 
 module.exports = function (app) {
 
@@ -7,8 +8,6 @@ module.exports = function (app) {
     });
 
     app.post("/api/friends", function (req, res) {
-
-        let comparison = { name: "nobody", similarity: 40 };
 
         for (f = 0; f < friendsData.friends.length; f++) {
 
@@ -23,16 +22,15 @@ module.exports = function (app) {
                 likability += similarity;
             };
 
-            if (likability < comparison.likability) {
-                newBestFriend = friendsData.friends[f];
+            console.log("likability of " + friendsData.friends[f].name + " is " + likability);
+
+            if (likability < comparison.similarity) {
                 comparison = {name: friendsData.friends[f].name, similarity: likability};
             };
             
         };
 
         friendsData.friends.push(req.body);
-        res.json(comparison.name);
+        res.json(comparison);
     });
-
-
 };
