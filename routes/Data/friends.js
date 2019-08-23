@@ -23,4 +23,8 @@ let friends = [
             5, 4, 4, 5, 5, 4, 4, 4, 3, 3,
         ]
     }
-]
+];
+
+module.exports = {
+    friends
+}
